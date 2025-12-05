@@ -338,6 +338,83 @@ game.catchPokemon = (pokemonObj) => {
     game.collection.push(game.party.shift());
   }
 };
-// game.catchPokemon(pokemon.find((pokemonObj) => pokemonObj.name === "Snorlax"));
+// game.catchPokemon();
 // console.log(game.collection);
 // console.log(game.party);
+
+/*
+Exercise 20
+Copy the `catchPokemon` method that you just wrote above, and paste it below. Modify is so that you can just pass in the name of a Pokemon instead of an entire object, and the method will look up the Pokemon from the data set for you.
+
+The string passed in should be allowed to be any case (for example, if the string 'PiKacHU' is passed to the function, it should match to 'Pikachu' in the data set). 
+
+If there is not a match, then return a string noting that the selected Pokemon does not exist. Ensure you do not decrement the pokeball count if an invalid Pokemon name is passed in, and also ensure that the Pokemon isn't added to the `game.party` or the `game.collection`.
+
+Solve Exercise 20 here:
+*/
+
+game.catchPokemon = (pokemonName) => {
+  let pokeballs = game.items.find((item) => item.name === "pokeball");
+  if (pokeballs.quantity <= 0) {
+    console.log("Not enough pokeballs to catch the desired pokemon!");
+    return false;
+  }
+  let pokemonObj = pokemon.find(
+    (pokemonObj) => pokemonObj.name.toLowerCase() === pokemonName.toLowerCase()
+  );
+  if (!pokemonObj) {
+    return "Pokemon does not exist!";
+  }
+
+  game.party.push(pokemonObj);
+  pokeballs.quantity--;
+  //If more than 6 pokemon in party, add first pokemon to collection
+  if (game.party.length > 6) {
+    game.collection.push(game.party.shift());
+  }
+};
+
+console.log(game.party);
+game.catchPokemon("snorlax");
+
+game.catchPokemon("sakldjasljda");
+console.log(game.party);
+
+/*
+Exercise 21
+Dynamically construct an object with the existing `pokemon` data sorted by the different pokemon types. The object will have this structure:
+
+{
+  grass: [
+    { number: 1, name: 'Bulbasaur', type: 'grass', hp: 45, starter: true },
+    { number: 2, name: 'Ivysaur', type: 'grass', hp: 60, starter: false },
+    { number: 3, name: 'Venusaur', type: 'grass', hp: 80, starter: false },
+    * more grass type Pokemon objects...
+  ],
+  fire: [
+    { number: 4, name: 'Charmander', type: 'fire', hp: 39, starter: true },
+    * more fire type Pokemon objects...
+  ],
+  water: [
+    * water type Pokemon objects...
+  ],
+  * etc... until there is an array for every Pokemon type!
+}
+
+Log the object when it's constructed.
+
+Solve Exercise 21 here:
+*/
+
+const pokemonsByType = {};
+let pokemonTypes = [];
+
+pokemon.forEach((pokemonObj) => {
+  if (!pokemonTypes.includes(pokemonObj.type)) {
+    pokemonTypes.push(pokemonObj.type);
+    pokemonsByType[pokemonObj.type] = [];
+  }
+  pokemonsByType[pokemonObj.type].push(pokemonObj);
+});
+
+// console.log(pokemonsByType);
