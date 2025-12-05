@@ -101,3 +101,6 @@ More Hints: The existing starter Pokemon will be *replaced* in your party with t
 
 Solve Exercise 7 here:
 */
+// console.log(game.party);
+game.party.splice(0, 1, pokemon[4]);
+// console.log(game.party);
