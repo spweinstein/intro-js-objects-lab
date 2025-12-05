@@ -180,7 +180,7 @@ Solve Exercise 12 here:
 */
 game.gyms.forEach((gym) => {
   if (gym.difficulty < 6) {
-    gym.complete = true;
+    gym.completed = true;
   }
 });
 console.log(game.gyms);
