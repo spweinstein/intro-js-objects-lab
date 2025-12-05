@@ -183,6 +183,7 @@ game.gyms.forEach((gym) => {
     gym.completed = true;
   }
 });
+
 // console.log(game.gyms);
 
 /*
@@ -239,3 +240,17 @@ Solve Exercise 14 here:
 
 game.partyCount = () => game.party.length;
 // console.log(game.partyCount());
+
+/*
+Exercise 15
+1. Now, complete gyms with a difficulty below 8. Reflect on how this is similar to or different from the previous gym exercises.
+(change the value of `complete` in the qualifying objects from false to true).
+
+Solve Exercise 15 here:
+*/
+
+game.gyms.forEach((gym) => {
+  if (gym.difficulty < 8) {
+    gym.completed = true;
+  }
+});
